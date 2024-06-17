@@ -1,11 +1,15 @@
 <!DOCSTRING html>
 <head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatibility" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Hello</title>
-		<link rel="stylesheet" href="{{url_for('static', filename='dist/css/output.css')}}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatibility" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello</title>
+    <link
+        rel="stylesheet"
+        href="{{url_for('static', filename='dist/css/output.css')}}"
+    />
+    <script src="{{url_for('static', filename='src/script.js')}}"></script>
 </head>
-<body>
-		<div class="content p-3">{% block content %}{% endblock %}</div>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div>{% block content %}{% endblock %}</div>
 </body>
