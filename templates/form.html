@@ -3,7 +3,12 @@
     <h1 class="text-2xl font-bold mb-6 text-center">
         QR Code Attendance Tracker
     </h1>
-    <form id="login-form" class="space-y-4">
+    <form
+        id="login-form"
+        class="space-y-4"
+        action="{{ url_for('login') }}"
+        method="post"
+    >
         <div>
             <label
                 for="user-type"
@@ -100,7 +105,7 @@
             </button>
         </div>
         <div class="flex justify-center">
-            <p class="text-sm text-gray-700">Made by Nibodh Daware ;)</p>
+            <p class="text-sm text-gray-700">Made by Nibodh Daware ;</p>
         </div>
     </form>
 </div>

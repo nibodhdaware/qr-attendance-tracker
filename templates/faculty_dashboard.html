@@ -1,0 +1,11 @@
+{% extends "index.html" %} {% block content %}
+<div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-2xl text-center">
+    <h1 class="text-3xl font-bold mb-8">Faculty Dashboard</h1>
+    <p class="mb-4">Scan this QR code to mark attendance:</p>
+    <img
+        src="{{ url_for('generate_qr', qr_url=qr_url) }}"
+        alt="QR Code"
+        class="mx-auto"
+    />
+</div>
+{% endblock %}
