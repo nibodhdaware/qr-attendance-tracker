@@ -1,15 +1,21 @@
 <!DOCSTRING html>
-<head>
+<html>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatibility" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello</title>
     <link
-        rel="stylesheet"
-        href="{{url_for('static', filename='dist/css/output.css')}}"
+      rel="stylesheet"
+      href="{{url_for('static', filename='dist/css/output.css')}}"
     />
     <script src="{{url_for('static', filename='src/script.js')}}"></script>
-</head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <script
+      src="https://unpkg.com/html5-qrcode"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body class="bg-gray-100 flex justify-center items-center min-h-screen">
     <div>{% block content %}{% endblock %}</div>
-</body>
+  </body>
+</html>

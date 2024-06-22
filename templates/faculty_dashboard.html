@@ -1,11 +1,54 @@
 {% extends "index.html" %} {% block content %}
-<div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-2xl text-center">
-    <h1 class="text-3xl font-bold mb-8">Faculty Dashboard</h1>
-    <p class="mb-4">Scan this QR code to mark attendance:</p>
-    <img
-        src="{{ url_for('generate_qr', qr_url=qr_url) }}"
-        alt="QR Code"
-        class="mx-auto"
-    />
+<div class="container mx-auto p-8">
+  <h1 class="text-3xl font-bold mb-6 text-center">Faculty Dashboard</h1>
+  <div class="flex flex-col lg:flex-row lg:space-x-8">
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2 flex justify-center items-center"
+    >
+      <div>
+        <h2 class="text-xl font-semibold mb-4 text-center">
+          Scan this QR Code to Log Attendance
+        </h2>
+        <img
+          src="{{ url_for('generate_qr', qr_url=qr_url) }}"
+          alt="QR Code"
+          class="border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+    </div>
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2">
+      <h2 class="text-xl font-semibold mb-4 text-center">Attendance Log</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th
+                class="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Roll Number
+              </th>
+              <th
+                class="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Student Name
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in students %}
+            <tr>
+              <td class="py-2 px-4 border-b border-gray-200">
+                {{ student.roll_number }}
+              </td>
+              <td class="py-2 px-4 border-b border-gray-200">
+                {{ student.student_name }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

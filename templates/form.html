@@ -1,112 +1,121 @@
 {% extends "index.html" %} {% block content %}
 <div class="bg-white p-8 rounded-lg shadow-lg" id="form-container">
-    <h1 class="text-2xl font-bold mb-6 text-center">
-        QR Code Attendance Tracker
-    </h1>
-    <form
-        id="login-form"
-        class="space-y-4"
-        action="{{ url_for('login') }}"
-        method="post"
-    >
-        <div>
-            <label
-                for="user-type"
-                class="block text-sm font-medium text-gray-700"
-                >Select User Type:</label
-            >
-            <select
-                id="user-type"
-                name="user_type"
-                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            >
-                <option value="faculty">Faculty</option>
-                <option value="student">Student</option>
-            </select>
-        </div>
+  <h1 class="text-2xl font-bold mb-6 text-center">
+    QR Code Attendance Tracker
+  </h1>
+  <form
+    id="login-form"
+    class="space-y-4"
+    action="{{ url_for('login') }}"
+    method="post"
+  >
+    <div>
+      <label for="user-type" class="block text-sm font-medium text-gray-700"
+        >Select User Type:</label
+      >
+      <select
+        id="user-type"
+        name="user_type"
+        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      >
+        <option value="faculty">Faculty</option>
+        <option value="student">Student</option>
+      </select>
+    </div>
 
-        <div id="faculty-form" class="space-y-4">
-            <div>
-                <label
-                    for="faculty-name"
-                    class="block text-sm font-medium text-gray-700"
-                    >Faculty Name:</label
-                >
-                <input
-                    type="text"
-                    id="faculty-name"
-                    name="faculty_name"
-                    class="mt-1 block w-full max-w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
-            <div>
-                <label
-                    for="subject-name"
-                    class="block text-sm font-medium text-gray-700"
-                    >Subject Name:</label
-                >
-                <input
-                    type="text"
-                    id="subject-name"
-                    name="subject_name"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
-            <div>
-                <label
-                    for="division"
-                    class="block text-sm font-medium text-gray-700"
-                    >Division:</label
-                >
-                <input
-                    type="text"
-                    id="division"
-                    name="division"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
-        </div>
+    <div id="faculty-form" class="space-y-4">
+      <div>
+        <label
+          for="faculty-name"
+          class="block text-sm font-medium text-gray-700"
+          >Faculty Name:</label
+        >
+        <input
+          type="text"
+          id="faculty-name"
+          name="faculty_name"
+          class="mt-1 block w-full max-w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label
+          for="subject-name"
+          class="block text-sm font-medium text-gray-700"
+          >Subject Name:</label
+        >
+        <input
+          type="text"
+          id="subject-name"
+          name="subject_name"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label for="division" class="block text-sm font-medium text-gray-700"
+          >Division:</label
+        >
+        <input
+          type="text"
+          id="division"
+          name="division"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
 
-        <div id="student-form" class="space-y-4 hidden">
-            <div>
-                <label
-                    for="roll-number"
-                    class="block text-sm font-medium text-gray-700"
-                    >Roll Number:</label
-                >
-                <input
-                    type="text"
-                    id="roll-number"
-                    name="roll_number"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
-            <div>
-                <label
-                    for="student-name"
-                    class="block text-sm font-medium text-gray-700"
-                    >Student Name:</label
-                >
-                <input
-                    type="text"
-                    id="student-name"
-                    name="student_name"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
-        </div>
+    <div id="student-form" class="space-y-4 hidden">
+      <div>
+        <label for="roll-number" class="block text-sm font-medium text-gray-700"
+          >Roll Number:</label
+        >
+        <input
+          type="text"
+          id="roll-number"
+          name="roll_number"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label
+          for="student-name"
+          class="block text-sm font-medium text-gray-700"
+          >Student Name:</label
+        >
+        <input
+          type="text"
+          id="student-name"
+          name="student_name"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
 
-        <div class="flex justify-center">
-            <button
-                type="submit"
-                class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-                Submit
-            </button>
-        </div>
-        <div class="flex justify-center">
-            <p class="text-sm text-gray-700">Made by Nibodh Daware ;</p>
-        </div>
-    </form>
+      <div
+        id="qr-reader"
+        style="width: 100%; max-width: 500px; margin: auto; display: none"
+      ></div>
+
+      <div class="flex justify-center">
+        <button
+          type="button"
+          id="start-qr-scan"
+          class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Scan QR Code
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <p class="text-sm text-gray-700">Made by Nibodh Daware ;</p>
+    </div>
+  </form>
 </div>
 {% endblock %}
