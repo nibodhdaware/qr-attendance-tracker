@@ -2,23 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 import qrcode
 import io
 from flask import send_file
-import pandas as pd
+import csv
 from datetime import datetime
 
 app = Flask(__name__)
 
-# Path to CSV file
-csv_file = 'attendance.csv'
-
-# Ensure the CSV file exists with the correct headers
-def init_csv():
-    try:
-        df = pd.read_csv(csv_file)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=['roll_number', 'student_name', 'timestamp'])
-        df.to_csv(csv_file, index=False)
-
-init_csv()
+student_data = []
 
 @app.route('/')
 def index():
@@ -32,12 +21,13 @@ def login():
         qr_url = url_for('scan_qr', _external=True)
         return render_template('faculty_dashboard.html', qr_url=qr_url)
     elif user_type == 'student':
-        roll_number = request.form['roll_number']
-        student_name = request.form['student_name']
-        # Here you can handle the student login if needed
-        return redirect(url_for('index'))
+        return redirect(url_for('student_scan'))
     else:
         return redirect(url_for('index'))
+
+@app.route('/student_scan')
+def student_scan():
+    return render_template('student_scan.html')
 
 @app.route('/generate_qr')
 def generate_qr():
@@ -58,12 +48,14 @@ def scan_qr():
     student_name = request.args.get('student_name')
     if roll_number and student_name:
         # Record the attendance
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        df = pd.read_csv(csv_file)
-        df = df.append({'roll_number': roll_number, 'student_name': student_name, 'timestamp': timestamp}, ignore_index=True)
-        df.to_csv(csv_file, index=False)
+        with open('attendance.csv', mode='a', newline='') as file:
+            writer = csv.writefile()
+            writer.writerow([roll_number, student_name])
+
+        student_data.append({'roll_number': roll_number, 'student_namr': student_name})
+
         return "Attendance recorded!"
     return "Invalid QR scan!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
