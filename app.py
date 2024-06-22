@@ -49,7 +49,7 @@ def scan_qr():
     if roll_number and student_name:
         # Record the attendance
         with open('attendance.csv', mode='a', newline='') as file:
-            writer = csv.writefile()
+            writer = csv.writer()
             writer.writerow([roll_number, student_name])
 
         student_data.append({'roll_number': roll_number, 'student_name': student_name})
