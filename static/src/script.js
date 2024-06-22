@@ -46,11 +46,11 @@ window.onload = function () {
 
     // Construct the URL with query parameters
     const url = new URL("/scan_qr", window.location.origin);
-    // url.searchParams.append("roll_number", rollNumber);
-    // url.searchParams.append("student_name", studentName);
-    console.log(rollNumber);
-    console.log(studentName);
-    console.log(url.href);
+    url.searchParams.append("roll_number", rollNumber);
+    url.searchParams.append("student_name", studentName);
+    // console.log(rollNumber);
+    // console.log(studentName);
+    // console.log(url.href);
 
     // Redirect to the URL or make a fetch request
     // Redirect example:
