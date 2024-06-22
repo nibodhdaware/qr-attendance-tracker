@@ -29,6 +29,7 @@ window.onload = function () {
   const userTypeSelect = document.getElementById("user-type");
   const startQrScanButton = document.getElementById("start-qr-scan");
   const qrReaderContainer = document.getElementById("qr-reader");
+  const isRequestSent = false;
 
   if (deviceType === "mobile") {
     userTypeSelect.value = "student";
@@ -40,6 +41,8 @@ window.onload = function () {
   userTypeSelect.addEventListener("change", toggleForm);
 
   function onScanSuccess() {
+    if (isRequestSent) return;
+
     // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
     const rollNumber = document.getElementById("roll-number").value;
     const studentName = document.getElementById("student-name").value;
@@ -55,6 +58,7 @@ window.onload = function () {
     // Redirect to the URL or make a fetch request
     // Redirect example:
     window.location.href = url.href;
+    isRequestSent = true;
   }
 
   startQrScanButton.addEventListener("click", function () {
@@ -64,19 +68,11 @@ window.onload = function () {
   });
 
   function startQrScan(facingMode = "environment") {
-    console.log("Starting QR scan with facing mode:", facingMode);
     const qrScanner = new Html5Qrcode("qr-reader");
-    qrScanner
-      .start(
-        { facingMode: facingMode },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        onScanSuccess,
-        (error) => {
-          console.error("QR Scan failed:", error);
-        }
-      )
-      .catch((error) => {
-        console.error("QR Scanner initialization failed:", error);
-      });
+    qrScanner.start(
+      { facingMode: facingMode },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      onScanSuccess
+    );
   }
 };
