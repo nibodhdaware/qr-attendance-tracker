@@ -63,10 +63,10 @@ window.onload = function () {
     startQrScan();
   });
 
-  function startQrScan() {
+  function startQrScan(facingMode = "environment") {
     const qrScanner = new Html5Qrcode("qr-reader");
     qrScanner.start(
-      { facingMode: "environment" },
+      { facingMode: facingMode },
       { fps: 10, qrbox: 250 },
       onScanSuccess
     );
