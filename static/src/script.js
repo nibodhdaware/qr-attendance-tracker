@@ -63,6 +63,7 @@ window.onload = function () {
               </tr>`;
             attendanceList.insertAdjacentHTML("beforeend", row);
           });
+          alert("Attendance recorded successfully.");
         } else {
           // Handle the case where the scan was not successful
           alert("Scan was not successful. Please try again.");
