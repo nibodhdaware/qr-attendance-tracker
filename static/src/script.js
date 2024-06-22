@@ -29,7 +29,6 @@ window.onload = function () {
   const userTypeSelect = document.getElementById("user-type");
   const startQrScanButton = document.getElementById("start-qr-scan");
   const qrReaderContainer = document.getElementById("qr-reader");
-  const isRequestSent = false;
 
   if (deviceType === "mobile") {
     userTypeSelect.value = "student";
@@ -41,8 +40,6 @@ window.onload = function () {
   userTypeSelect.addEventListener("change", toggleForm);
 
   function onScanSuccess() {
-    if (isRequestSent) return;
-
     // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
     const rollNumber = document.getElementById("roll-number").value;
     const studentName = document.getElementById("student-name").value;
@@ -84,9 +81,8 @@ window.onload = function () {
       });
 
     // Redirect to the URL or make a fetch request
-    // Redirect example:
-    window.location.href = url.href;
-    isRequestSent = true;
+    // // Redirect example:
+    // window.location.href = url.href;
   }
 
   startQrScanButton.addEventListener("click", function () {
