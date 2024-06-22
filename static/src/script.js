@@ -55,21 +55,14 @@ window.onload = function () {
         if (data.success) {
           // Assuming there's an element with the ID 'attendance-list' to display the attendance
           const attendanceList = document.getElementById("attendance-list");
-          const newRow = document.createElement("tr");
-
-          const rollNumberCell = document.createElement("td");
-          rollNumberCell.textContent = data.roll_number;
-          newRow.appendChild(rollNumberCell);
-
-          const studentNameCell = document.createElement("td");
-          studentNameCell.textContent = data.student_name;
-          newRow.appendChild(studentNameCell);
-
-          attendanceList.appendChild(newRow);
-
-          // Optionally, hide the QR reader container and show the start button again
-          qrReaderContainer.style.display = "none";
-          startQrScanButton.style.display = "block";
+          attendanceList.innerHTML = "";
+          data.forEach((item) => {
+            const row = `<tr>
+              <td>${item.subject}</td>
+              <td>${item.attendance}</td>
+              </tr>`;
+            attendanceList.insertAdjacentHTML("beforeend", row);
+          });
         } else {
           // Handle the case where the scan was not successful
           alert("Scan was not successful. Please try again.");
