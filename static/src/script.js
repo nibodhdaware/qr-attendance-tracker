@@ -56,13 +56,20 @@ window.onload = function () {
   });
 
   function startQrScan() {
-    const qrScanner = new Html5QrcodeScanner("qr-reader");
-    qrScanner.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: 250 },
-      onScanSuccess,
-      onScanFailure
+    const qrScanner = new Html5QrcodeScanner(
+      "qr-reader",
+      {
+        fps: 10,
+        qrbox: 250,
+      },
+      { facingMode: "environment" }
     );
+    // qrScanner.start(
+    //   { facingMode: "environment" },
+    //   { fps: 10, qrbox: 250 },
+    //   onScanSuccess,
+    //   onScanFailure
+    // );
     qrScanner.render(onScanSuccess, onScanFailure);
   }
 };
