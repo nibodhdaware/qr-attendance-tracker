@@ -69,7 +69,7 @@ window.onload = function () {
     qrScanner
       .start(
         { facingMode: facingMode },
-        { fps: 10, qrbox: 250 },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
         onScanSuccess,
         (error) => {
           console.error("QR Scan failed:", error);
