@@ -56,10 +56,16 @@ window.onload = function () {
   });
 
   function startQrScan() {
-    const html5QrCode = new Html5QrcodeScanner("qr-reader", {
+    const qrScanner = new Html5QrcodeScanner("qr-reader", {
       fps: 10,
       qrbox: 250,
     });
-    html5QrCode.render(onScanSuccess, onScanFailure);
+    qrScanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      onScanSuccess,
+      onScanFailure
+    );
+    qrScanner.render(onScanSuccess, onScanFailure);
   }
 };
