@@ -64,12 +64,19 @@ window.onload = function () {
   });
 
   function startQrScan(facingMode = "environment") {
+    console.log("Starting QR scan with facing mode:", facingMode);
     const qrScanner = new Html5Qrcode("qr-reader");
-    qrScanner.start(
-      { facingMode: facingMode },
-      { fps: 10, qrbox: 250 },
-      onScanSuccess
-    );
-    // qrScanner.render(onScanSuccess, onScanFailure);
+    qrScanner
+      .start(
+        { facingMode: facingMode },
+        { fps: 10, qrbox: 250 },
+        onScanSuccess,
+        (error) => {
+          console.error("QR Scan failed:", error);
+        }
+      )
+      .catch((error) => {
+        console.error("QR Scanner initialization failed:", error);
+      });
   }
 };
