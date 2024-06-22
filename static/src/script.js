@@ -41,8 +41,8 @@ window.onload = function () {
 
   function onScanSuccess() {
     // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
-    const rollNumber = document.getElementById("roll_number").value;
-    const studentName = document.getElementById("student_name").value;
+    const rollNumber = document.getElementById("roll-number").value;
+    const studentName = document.getElementById("student-name").value;
 
     // Construct the URL with query parameters
     const url = new URL("/scan_qr", window.location.origin);

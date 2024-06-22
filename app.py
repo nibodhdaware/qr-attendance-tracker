@@ -52,7 +52,7 @@ def scan_qr():
             writer = csv.writefile()
             writer.writerow([roll_number, student_name])
 
-        student_data.append({'roll_number': roll_number, 'student_namr': student_name})
+        student_data.append({'roll_number': roll_number, 'student_name': student_name})
 
         return "Attendance recorded!"
     return "Invalid QR scan!"
