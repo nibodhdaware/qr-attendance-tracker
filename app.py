@@ -19,7 +19,7 @@ def login():
     if user_type == 'faculty':
         # Generate the QR code URL
         qr_url = url_for('scan_qr', _external=True)
-        return render_template('faculty_dashboard.html', qr_url=qr_url)
+        return render_template('faculty_dashboard.html', students=student_data)
     elif user_type == 'student':
         return redirect(url_for('student_scan'))
     else:
