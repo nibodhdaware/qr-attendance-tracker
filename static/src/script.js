@@ -56,10 +56,7 @@ window.onload = function () {
   });
 
   function startQrScan() {
-    const qrScanner = new Html5QrcodeScanner("qr-reader", {
-      fps: 10,
-      qrbox: 250,
-    });
+    const qrScanner = new Html5QrcodeScanner("qr-reader");
     qrScanner.start(
       { facingMode: "environment" },
       { fps: 10, qrbox: 250 },
