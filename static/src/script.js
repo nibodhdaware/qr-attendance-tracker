@@ -51,9 +51,37 @@ window.onload = function () {
     const url = new URL("/scan_qr", window.location.origin);
     url.searchParams.append("roll_number", rollNumber);
     url.searchParams.append("student_name", studentName);
-    // console.log(rollNumber);
-    // console.log(studentName);
-    // console.log(url.href);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Assuming there's an element with the ID 'attendance-list' to display the attendance
+          const attendanceList = document.getElementById("attendance-list");
+          const newRow = document.createElement("tr");
+
+          const rollNumberCell = document.createElement("td");
+          rollNumberCell.textContent = data.roll_number;
+          newRow.appendChild(rollNumberCell);
+
+          const studentNameCell = document.createElement("td");
+          studentNameCell.textContent = data.student_name;
+          newRow.appendChild(studentNameCell);
+
+          attendanceList.appendChild(newRow);
+
+          // Optionally, hide the QR reader container and show the start button again
+          qrReaderContainer.style.display = "none";
+          startQrScanButton.style.display = "block";
+        } else {
+          // Handle the case where the scan was not successful
+          alert("Scan was not successful. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred while scanning. Please try again.");
+      });
 
     // Redirect to the URL or make a fetch request
     // Redirect example:
