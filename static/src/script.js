@@ -39,14 +39,22 @@ window.onload = function () {
 
   userTypeSelect.addEventListener("change", toggleForm);
 
-  function onScanSuccess(qrCodeMessage) {
-    // handle on success scan
-    console.log(qrCodeMessage);
-  }
+  function onScanSuccess() {
+    // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
+    const rollNumber = document.getElementById("roll_number").value;
+    const studentName = document.getElementById("student_name").value;
 
-  function onScanFailure(errorMessage) {
-    // handle on failure scan
-    console.log(errorMessage);
+    // Construct the URL with query parameters
+    const url = new URL("/scan_qr", window.location.origin);
+    // url.searchParams.append("roll_number", rollNumber);
+    // url.searchParams.append("student_name", studentName);
+    console.log(rollNumber);
+    console.log(studentName);
+    console.log(url.href);
+
+    // Redirect to the URL or make a fetch request
+    // Redirect example:
+    window.location.href = url.href;
   }
 
   startQrScanButton.addEventListener("click", function () {
