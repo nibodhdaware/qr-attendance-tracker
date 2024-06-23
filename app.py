@@ -1,4 +1,4 @@
-from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 import qrcode
 import io
 from flask import send_file
@@ -59,7 +59,12 @@ def scan_qr():
 def faculty_dashboard():
     # Generate the QR code URL
     qr_url = url_for('scan_qr', _external=True)
-    return render_template('faculty_dashboard.html', qr_url=qr_url, students=student_data)
+    return render_template('faculty_dashboard.html', qr_url=qr_url)
+
+@app.route('/get_updated_students')
+def get_updated_students():
+    # Assuming `student_data` is a list of dictionaries
+    return jsonify(student_data)    
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
