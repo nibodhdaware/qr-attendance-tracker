@@ -5,6 +5,7 @@ from flask import send_file
 import csv
 
 app = Flask(__name__)
+app.secret_key = "never gonna give you up"
 
 student_data = []
 
