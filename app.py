@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
 import qrcode
 import io
 from flask import send_file
@@ -16,9 +16,7 @@ def index():
 def login():
     user_type = request.form['user_type']
     if user_type == 'faculty':
-        # Generate the QR code URL
-        qr_url = url_for('scan_qr', _external=True)
-        return render_template('faculty_dashboard.html', qr_url=qr_url, students=student_data)
+        return redirect(url_for('faculty_dashboard'))
     elif user_type == 'student':
         return redirect(url_for('student_scan'))
     else:
@@ -52,13 +50,16 @@ def scan_qr():
             writer.writerow([roll_number, student_name])
 
         student_data.append({'roll_number': roll_number, 'student_name': student_name})
-        # faculty_dashboard()
+        redirect(url_for('faculty_dashboard'))
 
-        return jsonify({'success': True, 'roll_number': roll_number, 'student_name': student_name})
+        return flash(f"Attendance recorded successfully for {roll_number}: {student_name}")
     return jsonify({'success': False, 'message': 'Invalid QR scan!'})
 
+@app.route('/faculty_dashboard')
 def faculty_dashboard():
-    return render_template('faculty_dashboard.html', students=student_data)
+    # Generate the QR code URL
+    qr_url = url_for('scan_qr', _external=True)
+    return render_template('faculty_dashboard.html', qr_url=qr_url, students=student_data)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
