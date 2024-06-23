@@ -29,6 +29,7 @@ window.onload = function () {
   const userTypeSelect = document.getElementById("user-type");
   const startQrScanButton = document.getElementById("start-qr-scan");
   const qrReaderContainer = document.getElementById("qr-reader");
+  const qrScanner = new Html5Qrcode("qr-reader");
 
   if (deviceType === "mobile") {
     userTypeSelect.value = "student";
@@ -40,6 +41,7 @@ window.onload = function () {
   userTypeSelect.addEventListener("change", toggleForm);
 
   function onScanSuccess() {
+    qrScanner.stop();
     // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
     const rollNumber = document.getElementById("roll-number").value;
     const studentName = document.getElementById("student-name").value;
@@ -59,7 +61,6 @@ window.onload = function () {
   });
 
   function startQrScan(facingMode = "environment") {
-    const qrScanner = new Html5Qrcode("qr-reader");
     qrScanner.start(
       { facingMode: facingMode },
       { fps: 10, qrbox: { width: 250, height: 250 } },
