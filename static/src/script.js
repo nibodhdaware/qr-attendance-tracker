@@ -43,50 +43,11 @@ window.onload = function () {
     // Assuming 'roll_number' and 'student_name' are the IDs for the input fields
     const rollNumber = document.getElementById("roll-number").value;
     const studentName = document.getElementById("student-name").value;
-    let canRequest = true;
-    const requestDelay = 5000;
 
     // Construct the URL with query parameters
     const url = new URL("/scan_qr", window.location.origin);
     url.searchParams.append("roll_number", rollNumber);
     url.searchParams.append("student_name", studentName);
-
-    if (canRequest) {
-      canRequest = false; // Prevent new requests
-      url.searchParams.append("student_name", studentName);
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            const attendanceList = document.getElementById("attendance-list");
-            attendanceList.innerHTML = "";
-            data.forEach((item) => {
-              const row = `<tr>
-              <td>${item.subject}</td>
-              <td>${item.attendance}</td>
-              </tr>`;
-              // Corrected: Use innerHTML += to append rows
-              attendanceList.innerHTML += row;
-            });
-            alert("Attendance recorded successfully.");
-          } else {
-            alert("Scan was not successful. Please try again.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("An error occurred while scanning. Please try again.");
-        })
-        .finally(() => {
-          // Allow new requests after a delay
-          setTimeout(() => {
-            canRequest = true;
-          }, requestDelay);
-        });
-    } else {
-      console.log("Please wait before scanning again.");
-    }
   }
 
   startQrScanButton.addEventListener("click", function () {
