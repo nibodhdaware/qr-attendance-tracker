@@ -5,7 +5,6 @@ from flask import send_file
 import csv
 
 app = Flask(__name__)
-app.secret_key = "never gonna give you up"
 
 student_data = []
 
@@ -53,8 +52,8 @@ def scan_qr():
         student_data.append({'roll_number': roll_number, 'student_name': student_name})
         redirect(url_for('faculty_dashboard'))
 
-        return flash(f"Attendance recorded successfully for {roll_number}: {student_name}")
-    return jsonify({'success': False, 'message': 'Invalid QR scan!'})
+        return f'Attendance recorded successfully for {roll_number}: {student_name}'
+    return "There was an error recording attendance"
 
 @app.route('/faculty_dashboard')
 def faculty_dashboard():
