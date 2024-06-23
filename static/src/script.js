@@ -61,7 +61,7 @@ window.onload = function () {
               <td>${item.subject}</td>
               <td>${item.attendance}</td>
               </tr>`;
-            attendanceList.insertHTML(row);
+            attendanceList.innerHTML(row);
           });
           alert("Attendance recorded successfully.");
         } else {
