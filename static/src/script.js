@@ -48,6 +48,8 @@ window.onload = function () {
     const url = new URL("/scan_qr", window.location.origin);
     url.searchParams.append("roll_number", rollNumber);
     url.searchParams.append("student_name", studentName);
+
+    window.location.href = url.href;
   }
 
   startQrScanButton.addEventListener("click", function () {
