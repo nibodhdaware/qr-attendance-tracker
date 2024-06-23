@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session
 import qrcode
 import io
 from flask import send_file
@@ -52,10 +52,13 @@ def scan_qr():
             writer.writerow([roll_number, student_name])
 
         student_data.append({'roll_number': roll_number, 'student_name': student_name})
-        print(student_data)
+        faculty_dashboard()
 
         return jsonify({'success': True, 'roll_number': roll_number, 'student_name': student_name})
     return jsonify({'success': False, 'message': 'Invalid QR scan!'})
+
+def faculty_dashboard():
+    return render_template('faculty_dashboard.html', students=student_data)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
