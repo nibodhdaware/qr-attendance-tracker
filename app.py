@@ -70,7 +70,7 @@ def get_updated_students():
 def download_csv():
     directory = "."
     filename = "attendance.csv"
-    return send_from_directory(directory, filename)
+    return send_from_directory(directory, filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=10000)
