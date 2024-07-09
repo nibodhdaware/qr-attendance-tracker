@@ -66,7 +66,7 @@ def get_updated_students():
     # Assuming `student_data` is a list of dictionaries
     return jsonify(student_data)
 
-@app.route('/download_csv'):
+@app.route('/download_csv')
 def download_csv():
     directory = "."
     filename = "attendance.csv"
