@@ -64,7 +64,13 @@ def faculty_dashboard():
 @app.route('/get_updated_students')
 def get_updated_students():
     # Assuming `student_data` is a list of dictionaries
-    return jsonify(student_data)    
+    return jsonify(student_data)
+
+@app.route('/download_csv'):
+def download_csv():
+    directory = "."
+    filename = "attendance.csv"
+    return send_from_directory(directory, filename)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=10000)
+    app.run(debug=False, host='0.0.0.0', port=10000)
