@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request, redirect, url_for, send_from_directory
+import os
 import qrcode
 import io
 from flask import send_file
@@ -68,9 +69,12 @@ def get_updated_students():
 
 @app.route('/download_csv')
 def download_csv():
-    directory = "."
+    directory = os.getcwd()
     filename = "attendance.csv"
-    return send_from_directory(directory, filename, as_attachment=True)
+    try:
+        return send_from_directory(directory, filename, as_attachment=True)
+    except FileNotFoundError:
+        return "File not found", 404
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=10000)
